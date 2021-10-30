@@ -30,6 +30,7 @@ targets:
         SWIFT_OBJC_BRIDGING_HEADER: Sources/Resources/MyApp-Bridging-Header.h
         CODE_SIGN_STYLE: "Manual"
         UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: 1
         UILaunchStoryboardName: LaunchScreen
         EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
         VALIDATE_WORKSPACE: YES
