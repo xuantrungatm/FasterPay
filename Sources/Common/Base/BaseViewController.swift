@@ -10,6 +10,10 @@ import PKHUD
 class BaseViewController: UIViewController, HasDisposeBag { // swiftlint:disable:this final_class
 
     let isLoading = PublishRelay<Bool>()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +29,12 @@ class BaseViewController: UIViewController, HasDisposeBag { // swiftlint:disable
     }
     
     func setupUI() {
-
+        view.setGradientBackground(
+            topColor: UIColor(red: 48.0 / 255.0, green: 35.0 / 255.0, blue: 174.0 / 255.0, alpha: 1),
+            bottomColor: UIColor(red: 200.0 / 255.0, green: 109.0 / 255.0, blue: 215.0 / 255.0, alpha: 1),
+            maskColor: UIColor(red: 28.0 / 255.0, green: 28.0 / 255.0, blue: 28.0 / 255.0, alpha: 1)
+        )
+        
     }
 
     func bindDatas() {

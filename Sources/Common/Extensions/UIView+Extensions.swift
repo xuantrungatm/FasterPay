@@ -36,4 +36,22 @@ extension UIView {
         }
     }
     
+    func setGradientBackground(topColor: UIColor, bottomColor: UIColor, maskColor: UIColor? = nil) {
+        
+        let shapeMask = CAShapeLayer()
+        shapeMask.frame = bounds
+        shapeMask.path = UIBezierPath(rect: bounds).cgPath
+        shapeMask.opacity = 0.55
+        shapeMask.fillColor = maskColor?.cgColor
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
+        gradientLayer.frame = bounds
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        
+        layer.insertSublayer(gradientLayer, at: 0)
+        layer.addSublayer(shapeMask)
+    }
+    
 }
