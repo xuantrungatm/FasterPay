@@ -6,17 +6,58 @@
 
 import UIKit
 
+final class TabBar: UITabBar {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        var sizeThatFits = super.sizeThatFits(size)
+        sizeThatFits.height += 15
+        return sizeThatFits
+    }
+}
+
 final class MainViewController: UITabBarController, HasDisposeBag {
     
     var presenter: MainPresenter!
 
-    private let sizeIcon = CGSize(width: 24, height: 24)
-
+    private let sizeIcon = CGSize(width: 32, height: 32)
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        object_setClass(self.tabBar, TabBar.self)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        tabBar.shadowImage = UIImage() // remove top line
+        tabBar.backgroundImage = UIImage()
+        tabBar.isTranslucent = true
+        
+        let layer = CAShapeLayer()
+        let tabbarHeight = tabBar.frame.height + (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) + 15
+        layer.path = UIBezierPath(
+            roundedRect: CGRect(x: 0, y: 0, width: tabBar.bounds.width, height: tabbarHeight),
+            byRoundingCorners: [.topLeft, .topRight],
+            cornerRadii: CGSize(width: 15, height: 15)
+        ).cgPath
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: -2)
+        layer.shadowRadius = 2
+        layer.shadowOpacity = 0.08
+        layer.isHidden = false
+        layer.masksToBounds = false
+        layer.borderColor = UIColor.white.cgColor
+        layer.fillColor = UIColor.white.cgColor
+        tabBar.layer.insertSublayer(layer, at: 0)
+        
+        tabBar.barTintColor = .white
         tabBar.tintColor = .white
         UITabBar.appearance().tintColor = Asset.Colors.main.color
+        UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 14)], for: .normal)
         
         let wallet = AppScenes.wallet.viewController as! WalletViewController
         let walletNav = BaseNavigationController(rootViewController: wallet)
@@ -46,6 +87,10 @@ final class MainViewController: UITabBarController, HasDisposeBag {
         )
         
         viewControllers = [walletNav, scannerNav, profileNav]
+        
+        viewControllers?.forEach({
+            $0.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
+        })
     }
     
     deinit {

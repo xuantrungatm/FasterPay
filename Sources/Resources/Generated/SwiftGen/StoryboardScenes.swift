@@ -15,17 +15,17 @@ internal enum StoryboardScene {
   internal enum ProfileViewController: StoryboardType {
     internal static let storyboardName = "ProfileViewController"
 
-    internal static let initialScene = InitialSceneType<ProfileViewController>(storyboard: ProfileViewController.self)
+    internal static let initialScene = InitialSceneType<FasterPay.ProfileViewController>(storyboard: ProfileViewController.self)
   }
   internal enum QRScannerViewController: StoryboardType {
     internal static let storyboardName = "QRScannerViewController"
 
-    internal static let initialScene = InitialSceneType<QRScannerViewController>(storyboard: QRScannerViewController.self)
+    internal static let initialScene = InitialSceneType<FasterPay.QRScannerViewController>(storyboard: QRScannerViewController.self)
   }
   internal enum WalletViewController: StoryboardType {
     internal static let storyboardName = "WalletViewController"
 
-    internal static let initialScene = InitialSceneType<WalletViewController>(storyboard: WalletViewController.self)
+    internal static let initialScene = InitialSceneType<FasterPay.WalletViewController>(storyboard: WalletViewController.self)
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
