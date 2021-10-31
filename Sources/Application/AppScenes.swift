@@ -10,6 +10,7 @@ enum AppScenes {
     case scanner
     case profile
     case signIn
+    case signUp
     
     var viewController: UIViewController {
         switch self {
@@ -31,6 +32,10 @@ enum AppScenes {
         case .signIn:
             let vc = StoryboardScene.SignInViewController.initialScene.instantiate()
             let vcInjected = SignInRouter(viewController: vc).viewController
+            return vcInjected
+        case .signUp:
+            let vc = StoryboardScene.SignUpViewController.initialScene.instantiate()
+            let vcInjected = SignUpRouter(viewController: vc).viewController
             return vcInjected
         }
     }

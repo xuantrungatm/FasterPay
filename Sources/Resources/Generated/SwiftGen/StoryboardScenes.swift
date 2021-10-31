@@ -27,6 +27,11 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<FasterPay.SignInViewController>(storyboard: SignInViewController.self)
   }
+  internal enum SignUpViewController: StoryboardType {
+    internal static let storyboardName = "SignUpViewController"
+
+    internal static let initialScene = InitialSceneType<FasterPay.SignUpViewController>(storyboard: SignUpViewController.self)
+  }
   internal enum WalletViewController: StoryboardType {
     internal static let storyboardName = "WalletViewController"
 
