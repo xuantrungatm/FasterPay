@@ -41,7 +41,6 @@ extension UIView {
         let shapeMask = CAShapeLayer()
         shapeMask.frame = bounds
         shapeMask.path = UIBezierPath(rect: bounds).cgPath
-        shapeMask.opacity = 0.55
         shapeMask.fillColor = maskColor?.cgColor
 
         let gradientLayer = CAGradientLayer()
@@ -51,7 +50,7 @@ extension UIView {
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         
         layer.insertSublayer(gradientLayer, at: 0)
-        layer.addSublayer(shapeMask)
+        layer.insertSublayer(shapeMask, at: 1)
     }
     
 }

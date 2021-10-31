@@ -12,7 +12,7 @@ final class GradientView: UIView {
     
     private var _topColor = UIColor(red: 48.0 / 255.0, green: 35.0 / 255.0, blue: 174.0 / 255.0, alpha: 1)
     private var _bottomColor = UIColor(red: 200.0 / 255.0, green: 109.0 / 255.0, blue: 215.0 / 255.0, alpha: 1)
-    private var _maskColor = UIColor(red: 28.0 / 255.0, green: 28.0 / 255.0, blue: 28.0 / 255.0, alpha: 1)
+    private var _maskColor = UIColor(red: 28.0 / 255.0, green: 28.0 / 255.0, blue: 28.0 / 255.0, alpha: 0.55)
     
     @IBInspectable var topColor: UIColor {
         get {
