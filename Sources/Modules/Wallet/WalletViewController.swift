@@ -10,6 +10,8 @@ import MJRefresh
 
 final class WalletViewController: BaseTableViewViewController {
 
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
     var presenter: WalletPresenter!
@@ -49,8 +51,12 @@ final class WalletViewController: BaseTableViewViewController {
         presenter.bind(isLoading: isLoading)
         presenter.bind(paggingable: self)
         
+        Observable.just(())
+            ~> presenter.userTrigger
+            ~ disposeBag
+        
         Observable.merge(
-            rx.viewWillAppear.mapTo(()),
+            .just(()),
             headerRefreshTrigger.asObservable()
         )
         ~> presenter.trigger
@@ -77,4 +83,9 @@ extension WalletViewController: UITableViewDelegate {
     }
 }
 
-extension WalletViewController: WalletViewInterface {}
+extension WalletViewController: WalletViewInterface {
+    func updateUI(with user: User?) {
+        currencyLabel.text = user?.currency.symbol
+        balanceLabel.text = user?.balance.toCurrencyFormat()
+    }
+}

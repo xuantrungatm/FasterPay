@@ -17,9 +17,11 @@ final class WalletRouter: WalletRouterInterface, Router {
 
     required init(viewController: WalletViewController) {
         self.viewController = viewController
-        viewController.presenter = WalletPresenter(view: viewController,
-                                                   router: self,
-                                                   interactor: WalletInteractor())
+        viewController.presenter = WalletPresenter(
+            view: viewController,
+            router: self,
+            interactor: WalletInteractor()
+        )
     }
 
     deinit {

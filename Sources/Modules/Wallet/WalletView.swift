@@ -6,4 +6,5 @@
 //
 
 protocol WalletViewInterface: BaseView {
+    func updateUI(with user: User?)
 }

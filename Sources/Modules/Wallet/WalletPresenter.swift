@@ -26,6 +26,7 @@ final class WalletPresenter: WalletPresenterInterface, PresenterPageable {
     let footerActivityIndicator = ActivityIndicator()
 
     let trigger = PublishRelay<Void>()
+    let userTrigger = PublishRelay<Void>()
     var currentPage: Int = 1
     let elements = BehaviorRelay<[Transaction]>(value: [])
 
@@ -36,10 +37,23 @@ final class WalletPresenter: WalletPresenterInterface, PresenterPageable {
         self.router = router
         self.interactor = interactor
         
+        userTrigger
+            .flatMapLatest({ [weak self] () -> Driver<User?> in
+                guard let self = self else { return .empty() }
+                return self.interactor.getUserInfo()
+                    .asDriver(onErrorJustReturn: nil)
+            })
+            .asDriver(onErrorJustReturn: nil)
+            .drive(onNext: { [weak self] user in
+                guard let self = self else { return }
+                self.view.updateUI(with: user)
+            })
+            ~ disposeBag
+        
         trigger
             .flatMapLatest({ [weak self] () -> Driver<[Transaction]> in
-                guard let self = self else { return .just([]) }
-                return Single.just([])
+                guard let self = self else { return .empty() }
+                return self.interactor.getTransactions()
                     .trackActivity(self.headerActivityIndicator)
                     .asDriver(onErrorJustReturn: [])
             })

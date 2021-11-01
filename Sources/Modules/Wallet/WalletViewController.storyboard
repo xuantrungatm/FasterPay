@@ -36,7 +36,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5dn-W5-pvs">
                                 <rect key="frame" x="116.5" y="105" width="142" height="45"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPj-g7-lp0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPj-g7-lp0">
                                         <rect key="frame" x="0.0" y="15" width="14.5" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="hYs-Tk-edf"/>
@@ -132,7 +132,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="balanceLabel" destination="5Dk-7p-2x7" id="XWe-HA-hA0"/>
                         <outlet property="containerView" destination="inu-dJ-arD" id="nl4-xi-a8y"/>
+                        <outlet property="currencyLabel" destination="OPj-g7-lp0" id="cHC-pC-aAt"/>
                         <outlet property="tableView" destination="xOT-XO-DAk" id="f1W-hW-IYf"/>
                     </connections>
                 </viewController>

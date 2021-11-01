@@ -47,8 +47,6 @@ enum Currency: Int, PersistableEnum, Codable {
         }
     }
     
-    
-    
     var description: String {
         switch self {
         case .yen:
