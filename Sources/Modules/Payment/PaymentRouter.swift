@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PaymentRouterInterface {
-    
+    func presentPaymentSuccess()
 }
 
 final class PaymentRouter: PaymentRouterInterface, Router {
@@ -22,6 +22,13 @@ final class PaymentRouter: PaymentRouterInterface, Router {
             router: self,
             interactor: PaymentInteractor()
         )
+    }
+    
+    func presentPaymentSuccess() {
+        let vc = AppScenes.paymentSuccess.viewController
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        viewController.present(vc, animated: true, completion: nil)
     }
 
     deinit {

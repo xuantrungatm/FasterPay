@@ -9,6 +9,7 @@ protocol PaymentPresenterInterface: Presenter {
     var view: PaymentViewInterface { get }
     var router: PaymentRouterInterface { get }
     var interactor: PaymentInteractorInterface { get }
+    func pay()
 }
 
 final class PaymentPresenter: PaymentPresenterInterface, HasActivityIndicator, HasDisposeBag {
@@ -26,6 +27,14 @@ final class PaymentPresenter: PaymentPresenterInterface, HasActivityIndicator, H
         self.view = view
         self.router = router
         self.interactor = interactor
+    }
+    
+    func pay() {
+        paySuccess()
+    }
+    
+    private func paySuccess() {
+        router.presentPaymentSuccess()
     }
 
     deinit {

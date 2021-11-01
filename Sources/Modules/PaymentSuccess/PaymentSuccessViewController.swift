@@ -1,5 +1,5 @@
 //
-//  PaymentViewController.swift
+//  PaymentSuccessViewController.swift
 //  MyApp
 //
 //  Created by Xuan Trung on 01/11/2021.
@@ -7,12 +7,11 @@
 
 import UIKit
 
-final class PaymentViewController: BaseViewController {
+final class PaymentSuccessViewController: BaseViewController {
     
     @IBOutlet weak var containerView: UIView!
     
-    var presenter: PaymentPresenter!
-    var info: PaymentInfo?
+    var presenter: PaymentSuccessPresenter!
 
     deinit {
         LogInfo("\(Swift.type(of: self)) Deinit")
@@ -25,15 +24,12 @@ final class PaymentViewController: BaseViewController {
 
     override func setupUI() {
         super.setupUI()
-        containerView.setRadius(corner: [.topLeft, .topRight], cornerRadii: CGSize(width: 20, height:  20))
+        containerView.clipsToBounds = true
+        containerView.layer.cornerRadius = 20
     }
 
-    @IBAction func clickBack(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
-
-    @IBAction func clickPayment(_ sender: UIButton) {
-        presenter.pay()
+    @IBAction func completeTransaction(_ sender: UIButton) {
+        presenter.completeTransaction()
     }
 
     override func bindDatas() {
@@ -41,7 +37,7 @@ final class PaymentViewController: BaseViewController {
         
         presenter.bind(isLoading: isLoading)
     }
-    
+
 }
 
-extension PaymentViewController: PaymentViewInterface {}
+extension PaymentSuccessViewController: PaymentSuccessViewInterface {}
