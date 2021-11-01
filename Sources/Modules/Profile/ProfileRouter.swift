@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProfileRouterInterface {
-    
+    func moveToSignIn()
 }
 
 final class ProfileRouter: ProfileRouterInterface, Router {
@@ -22,6 +22,11 @@ final class ProfileRouter: ProfileRouterInterface, Router {
             router: self,
             interactor: ProfileInteractor()
         )
+    }
+    
+    func moveToSignIn() {
+        let vc = AppScenes.signIn.viewController
+        UIWindow.shared?.rootViewController = BaseNavigationController(rootViewController: vc)
     }
 
     deinit {

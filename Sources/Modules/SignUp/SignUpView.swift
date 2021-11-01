@@ -6,4 +6,5 @@
 //
 
 protocol SignUpViewInterface: BaseView {
+    func showAlert(content: String)
 }

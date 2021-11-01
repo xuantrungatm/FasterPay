@@ -9,16 +9,22 @@ protocol SignInPresenterInterface: Presenter {
     var view: SignInViewInterface { get }
     var router: SignInRouterInterface { get }
     var interactor: SignInInteractorInterface { get }
+    func handleSignUp()
 }
 
 final class SignInPresenter: SignInPresenterInterface, HasActivityIndicator, HasDisposeBag {
+    
+    struct LoginInfo {
+        var email: String
+        var pass: String
+    }
 
     unowned let view: SignInViewInterface
     let router: SignInRouterInterface
     let interactor: SignInInteractorInterface
 
     let activityIndicator = ActivityIndicator()
-    let trigger = PublishRelay<Void>()
+    let trigger = PublishRelay<LoginInfo>()
 
     init(view: SignInViewInterface,
          router: SignInRouterInterface,
@@ -26,6 +32,47 @@ final class SignInPresenter: SignInPresenterInterface, HasActivityIndicator, Has
         self.view = view
         self.router = router
         self.interactor = interactor
+        
+        trigger
+            .flatMapLatest({ [weak self] user -> Driver<Bool> in
+                guard let self = self, self.isValid(user: user) else { return .empty() }
+                return self.interactor.login(email: user.email, pass: user.pass)
+                    .asDriver(onErrorJustReturn: false)
+            })
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] result in
+                guard let self = self else { return }
+                if result {
+                    self.router.moveToHome()
+                } else {
+                    self.view.showAlert(content: "Login fail!")
+                }
+            })
+            ~ disposeBag
+    }
+
+    func handleSignUp() {
+        router.moveToSignUp()
+    }
+    
+    func isValid(user: LoginInfo) -> Bool {
+        if user.email.isEmpty {
+            view.showAlert(content: "Email is empty.")
+            return false
+        }
+        if !user.email.isValidEmail() {
+            view.showAlert(content: "Email is invalid.")
+            return false
+        }
+        if user.pass.isEmpty {
+            view.showAlert(content: "Password is empty.")
+            return false
+        }
+        if !user.pass.isValidPassword() {
+            view.showAlert(content: "Password is invalid.")
+            return false
+        }
+        return true
     }
 
     deinit {

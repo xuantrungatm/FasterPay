@@ -9,6 +9,7 @@ protocol ProfilePresenterInterface: Presenter {
     var view: ProfileViewInterface { get }
     var router: ProfileRouterInterface { get }
     var interactor: ProfileInteractorInterface { get }
+    func handleLogOut()
 }
 
 final class ProfilePresenter: ProfilePresenterInterface, HasActivityIndicator, HasDisposeBag {
@@ -32,6 +33,11 @@ final class ProfilePresenter: ProfilePresenterInterface, HasActivityIndicator, H
         LogInfo("\(Swift.type(of: self)) Deinit")
         LeakDetector.instance.expectDeallocate(object: router as AnyObject)
         LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
+    }
+
+    func handleLogOut() {
+        interactor.logOut()
+        router.moveToSignIn()
     }
 
 }

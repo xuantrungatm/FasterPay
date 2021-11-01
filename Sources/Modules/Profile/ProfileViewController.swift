@@ -34,7 +34,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func logout(_ sender: UIButton) {
-        
+        presenter.handleLogOut()
     }
 }
 

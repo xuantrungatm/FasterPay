@@ -46,6 +46,7 @@ PODS:
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
   - SwiftGen (6.4.0)
+  - SwiftyUserDefaults (5.3.0)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
@@ -68,6 +69,7 @@ DEPENDENCIES:
   - RxSwiftExt (~> 5)
   - RxViewController
   - SwiftGen (~> 6.0)
+  - SwiftyUserDefaults (~> 5.0)
   - XCGLogger
 
 SPEC REPOS:
@@ -92,6 +94,7 @@ SPEC REPOS:
     - RxSwiftExt
     - RxViewController
     - SwiftGen
+    - SwiftyUserDefaults
     - XCGLogger
 
 SPEC CHECKSUMS:
@@ -115,8 +118,9 @@ SPEC CHECKSUMS:
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
   RxViewController: 7330a46e5c31cd680db169da4c9fc8676e975a81
   SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 3ee7c3801870358a702d8e010110da287055e0e1
+PODFILE CHECKSUM: 51594a31dcb6295b7c931a3bdb0d6122c54489c5
 
 COCOAPODS: 1.10.1

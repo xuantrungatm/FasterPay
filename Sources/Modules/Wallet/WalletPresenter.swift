@@ -39,7 +39,7 @@ final class WalletPresenter: WalletPresenterInterface, PresenterPageable {
         trigger
             .flatMapLatest({ [weak self] () -> Driver<[Transaction]> in
                 guard let self = self else { return .just([]) }
-                return Single.just([Transaction](repeating: Transaction(), count: 10))
+                return Single.just([])
                     .trackActivity(self.headerActivityIndicator)
                     .asDriver(onErrorJustReturn: [])
             })

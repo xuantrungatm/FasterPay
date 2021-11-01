@@ -6,10 +6,16 @@
 //
 
 protocol ProfileInteractorInterface {
-
+    func logOut()
 }
 
 final class ProfileInteractor: ProfileInteractorInterface {
+    
+    @Injected var auth: AuthManagerInterface
+    
+    func logOut() {
+        auth.logOut()
+    }
 
     deinit {
         LogInfo("\(Swift.type(of: self)) Deinit")

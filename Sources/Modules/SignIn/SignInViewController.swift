@@ -9,6 +9,8 @@ import UIKit
 
 final class SignInViewController: BaseViewController {
     
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passTextField: UITextField!
     var presenter: SignInPresenter!
 
     deinit {
@@ -22,7 +24,21 @@ final class SignInViewController: BaseViewController {
 
     override func setupUI() {
         super.setupUI()
-    }    
+    }
+
+    @IBAction func clickSignIn(_ sender: UIButton) {
+        let info = SignInPresenter.LoginInfo(
+            email: emailTextField.text ?? "",
+            pass: passTextField.text ?? ""
+        )
+        Observable.just(info)
+            ~> presenter.trigger
+            ~ disposeBag
+    }
+    
+    @IBAction func clickSignUp(_ sender: UIButton) {
+        presenter.handleSignUp()
+    }
 
     override func bindDatas() {
         super.bindDatas()
@@ -32,4 +48,8 @@ final class SignInViewController: BaseViewController {
     
 }
 
-extension SignInViewController: SignInViewInterface {}
+extension SignInViewController: SignInViewInterface {
+    func showAlert(content: String) {
+        AppHelper.shared.showConfirmAlert(title: content, message: nil, action: nil)
+    }
+}

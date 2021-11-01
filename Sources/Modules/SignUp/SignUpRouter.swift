@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SignUpRouterInterface {
-    
+    func backToSignIn()
 }
 
 final class SignUpRouter: SignUpRouterInterface, Router {
@@ -17,9 +17,15 @@ final class SignUpRouter: SignUpRouterInterface, Router {
 
     required init(viewController: SignUpViewController) {
         self.viewController = viewController
-        viewController.presenter = SignUpPresenter(view: viewController,
-                                                   router: self,
-                                                   interactor: SignUpInteractor())
+        viewController.presenter = SignUpPresenter(
+            view: viewController,
+            router: self,
+            interactor: SignUpInteractor()
+        )
+    }
+
+    func backToSignIn() {
+        viewController.navigationController?.popViewController(animated: true)
     }
 
     deinit {

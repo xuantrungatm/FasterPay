@@ -22,5 +22,6 @@ target 'MyApp' do
   pod 'RealmSwift'
   pod 'IQKeyboardManagerSwift'
   pod 'PopupDialog', '~> 1.1'
+  pod 'SwiftyUserDefaults', '~> 5.0'
 
 end

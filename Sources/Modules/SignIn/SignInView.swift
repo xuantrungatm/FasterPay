@@ -6,4 +6,5 @@
 //
 
 protocol SignInViewInterface: BaseView {
+    func showAlert(content: String)
 }
