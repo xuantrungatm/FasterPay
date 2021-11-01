@@ -6,4 +6,5 @@
 //
 
 protocol ProfileViewInterface: BaseView {
+    func updateUI(with user: User?)
 }

@@ -9,6 +9,7 @@ import UIKit
 
 final class ProfileViewController: BaseViewController {
     
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var containView: UIView!
     
     var presenter: ProfilePresenter!
@@ -24,13 +25,17 @@ final class ProfileViewController: BaseViewController {
 
     override func setupUI() {
         super.setupUI()
-        containView.setRadius(corner: [.topLeft, .topRight], cornerRadii: CGSize(width: 20, height:  20))
+        containView.clipsToBounds = true
+        containView.layer.cornerRadius = 20
     }    
 
     override func bindDatas() {
         super.bindDatas()
         
         presenter.bind(isLoading: isLoading)
+        Observable.just(())
+            ~> presenter.trigger
+            ~ disposeBag
     }
     
     @IBAction func logout(_ sender: UIButton) {
@@ -38,4 +43,8 @@ final class ProfileViewController: BaseViewController {
     }
 }
 
-extension ProfileViewController: ProfileViewInterface {}
+extension ProfileViewController: ProfileViewInterface {
+    func updateUI(with user: User?) {
+        nameLabel.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
+    }
+}

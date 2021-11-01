@@ -27,6 +27,19 @@ final class ProfilePresenter: ProfilePresenterInterface, HasActivityIndicator, H
         self.view = view
         self.router = router
         self.interactor = interactor
+        
+        trigger
+            .flatMapLatest({ [weak self] () -> Driver<User?> in
+                guard let self = self else { return .empty() }
+                return self.interactor.getUserInfo()
+                    .asDriver(onErrorJustReturn: nil)
+            })
+            .asDriver(onErrorJustReturn: nil)
+            .drive(onNext: { [weak self] user in
+                guard let self = self else { return }
+                self.view.updateUI(with: user)
+            })
+            ~ disposeBag
     }
 
     deinit {
