@@ -72,7 +72,7 @@ final class QRScannerViewController: BaseViewController, AVCaptureMetadataOutput
             return
         }
 
-        if (captureSession.canAddInput(videoInput)) {
+        if captureSession.canAddInput(videoInput) {
             captureSession.addInput(videoInput)
         } else {
             captureSession = nil
@@ -81,7 +81,7 @@ final class QRScannerViewController: BaseViewController, AVCaptureMetadataOutput
 
         let metadataOutput = AVCaptureMetadataOutput()
 
-        if (captureSession.canAddOutput(metadataOutput)) {
+        if captureSession.canAddOutput(metadataOutput) {
             captureSession.addOutput(metadataOutput)
 
             metadataOutput.rectOfInterest = previewLayer.metadataOutputRectConverted(fromLayerRect: scanFrame)
@@ -93,6 +93,37 @@ final class QRScannerViewController: BaseViewController, AVCaptureMetadataOutput
         }
         
         captureSession.startRunning()
+    }
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        captureSession.stopRunning()
+
+        if let metadataObject = metadataObjects.first {
+            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
+            guard let stringValue = readableObject.stringValue else { return }
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
+            handleQR(code: stringValue)
+        }
+    }
+    
+    func handleQR(code: String) {
+        guard let paymentInfo = decodeQR(code) else {
+            let alert = UIAlertController(title: "This QR is invalid.", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+                self?.captureSession.startRunning()
+            }))
+            present(alert, animated: true)
+            return
+        }
+        
+        // TODO: handle amount > balance
+        
+        
+    }
+    
+    private func decodeQR(_ qrcode: String) -> PaymentInfo? {
+        return try? JSONDecoder().decode(PaymentInfo.self, from: Data(qrcode.utf8))
     }
     
     override func bindDatas() {
