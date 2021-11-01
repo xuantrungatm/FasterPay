@@ -65,4 +65,8 @@ extension SignUpViewController: SignUpViewInterface {
     func showAlert(content: String) {
         AppHelper.shared.showConfirmAlert(title: content, message: nil, action: nil)
     }
+    
+    func showAlert(content: String, action: ((UIAlertAction) -> Void)? = nil) {
+        AppHelper.shared.showConfirmAlert(title: content, message: nil, action: action)
+    }
 }

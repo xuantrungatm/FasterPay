@@ -7,4 +7,5 @@
 
 protocol SignUpViewInterface: BaseView {
     func showAlert(content: String)
+    func showAlert(content: String, action: ((UIAlertAction) -> Void)?)
 }

@@ -29,21 +29,29 @@ final class SignUpPresenter: SignUpPresenterInterface, HasActivityIndicator, Has
         self.router = router
         self.interactor = interactor
         
-        trigger
+        let registerResult = trigger
             .flatMapLatest({ [weak self] user -> Driver<Bool> in
                 guard let self = self, self.isValid(user: user) else { return .empty() }
                 return self.interactor.createUser(user: user)
                     .asDriver(onErrorJustReturn: false)
             })
             .asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [weak self] result in
+            
+        registerResult
+            .filter({ $0 })
+            .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                if result {
-                    self.view.showAlert(content: "Register user successfully.")
-                    self.router.backToSignIn()
-                } else {
-                    self.view.showAlert(content: "Email existed!")
-                }
+                self.view.showAlert(content: "Register user successfully.", action: { [weak self] _ in
+                    self?.router.backToSignIn()
+                })
+            })
+            ~ disposeBag
+        
+        registerResult
+            .filter({ !$0 })
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.view.showAlert(content: "Email existed!")
             })
             ~ disposeBag
     }
