@@ -104,9 +104,8 @@ extension MainViewController: MainViewInterface {}
 extension MainViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let notNeedHiddenTabbar = viewController.isKind(of: WalletViewController.self) || viewController.isKind(of: QRScannerViewController.self) || viewController.isKind(of: ProfileViewController.self)
-        let isHiddenNavi = notNeedHiddenTabbar
         tabBar.isHidden = !notNeedHiddenTabbar
-        navigationController.setNavigationBarHidden(isHiddenNavi, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: true)
         if let coordinator = navigationController.topViewController?.transitionCoordinator {
             coordinator.notifyWhenInteractionChanges { [weak self] context in
                 if context.isCancelled {

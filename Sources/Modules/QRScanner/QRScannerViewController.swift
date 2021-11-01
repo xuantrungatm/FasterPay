@@ -117,9 +117,7 @@ final class QRScannerViewController: BaseViewController, AVCaptureMetadataOutput
             return
         }
         
-        // TODO: handle amount > balance
-        
-        
+        presenter.scanQRSuccess(info: paymentInfo)
     }
     
     private func decodeQR(_ qrcode: String) -> PaymentInfo? {

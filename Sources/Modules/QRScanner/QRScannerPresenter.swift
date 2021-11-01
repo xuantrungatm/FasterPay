@@ -9,6 +9,7 @@ protocol QRScannerPresenterInterface: Presenter {
     var view: QRScannerViewInterface { get }
     var router: QRScannerRouterInterface { get }
     var interactor: QRScannerInteractorInterface { get }
+    func scanQRSuccess(info: PaymentInfo)
 }
 
 final class QRScannerPresenter: QRScannerPresenterInterface, HasActivityIndicator, HasDisposeBag {
@@ -26,6 +27,10 @@ final class QRScannerPresenter: QRScannerPresenterInterface, HasActivityIndicato
         self.view = view
         self.router = router
         self.interactor = interactor
+    }
+    
+    func scanQRSuccess(info: PaymentInfo) {
+        router.moveToPayment(with: info)
     }
 
     deinit {

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol QRScannerRouterInterface {
-    
+    func moveToPayment(with info: PaymentInfo)
 }
 
 final class QRScannerRouter: QRScannerRouterInterface, Router {
@@ -17,9 +17,16 @@ final class QRScannerRouter: QRScannerRouterInterface, Router {
 
     required init(viewController: QRScannerViewController) {
         self.viewController = viewController
-        viewController.presenter = QRScannerPresenter(view: viewController,
-                                                   router: self,
-                                                   interactor: QRScannerInteractor())
+        viewController.presenter = QRScannerPresenter(
+            view: viewController,
+            router: self,
+            interactor: QRScannerInteractor()
+        )
+    }
+    
+    func moveToPayment(with info: PaymentInfo) {
+        let vc = AppScenes.payment(info: info).viewController
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
 
     deinit {

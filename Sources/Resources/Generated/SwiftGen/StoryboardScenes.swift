@@ -12,6 +12,11 @@ import UIKit
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
+  internal enum PaymentViewController: StoryboardType {
+    internal static let storyboardName = "PaymentViewController"
+
+    internal static let initialScene = InitialSceneType<FasterPay.PaymentViewController>(storyboard: PaymentViewController.self)
+  }
   internal enum ProfileViewController: StoryboardType {
     internal static let storyboardName = "ProfileViewController"
 

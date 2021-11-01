@@ -11,6 +11,7 @@ enum AppScenes {
     case profile
     case signIn
     case signUp
+    case payment(info: PaymentInfo)
     
     var viewController: UIViewController {
         switch self {
@@ -36,6 +37,11 @@ enum AppScenes {
         case .signUp:
             let vc = StoryboardScene.SignUpViewController.initialScene.instantiate()
             let vcInjected = SignUpRouter(viewController: vc).viewController
+            return vcInjected
+        case let .payment(info):
+            let vc = StoryboardScene.PaymentViewController.initialScene.instantiate()
+            vc.info = info
+            let vcInjected = PaymentRouter(viewController: vc).viewController
             return vcInjected
         }
     }

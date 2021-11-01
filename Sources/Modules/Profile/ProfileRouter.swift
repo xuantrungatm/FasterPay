@@ -17,9 +17,11 @@ final class ProfileRouter: ProfileRouterInterface, Router {
 
     required init(viewController: ProfileViewController) {
         self.viewController = viewController
-        viewController.presenter = ProfilePresenter(view: viewController,
-                                                   router: self,
-                                                   interactor: ProfileInteractor())
+        viewController.presenter = ProfilePresenter(
+            view: viewController,
+            router: self,
+            interactor: ProfileInteractor()
+        )
     }
 
     deinit {
