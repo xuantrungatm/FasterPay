@@ -39,7 +39,9 @@ internal enum Asset {
     internal static let icSuccess = ImageAsset(name: "ic_success")
     internal static let icSuccessBg = ImageAsset(name: "ic_success_bg")
     internal static let icTerm = ImageAsset(name: "ic_term")
+    internal static let icTopup = ImageAsset(name: "ic_topup")
     internal static let icTouch = ImageAsset(name: "ic_touch")
+    internal static let icVault = ImageAsset(name: "ic_vault")
     internal static let icWallet = ImageAsset(name: "ic_wallet")
     internal static let logo = ImageAsset(name: "logo")
   }

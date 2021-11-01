@@ -11,14 +11,23 @@ protocol WalletPresenterInterface: Presenter {
     var interactor: WalletInteractorInterface { get }
 }
 
-final class WalletPresenter: WalletPresenterInterface, HasActivityIndicator, HasDisposeBag {
+final class WalletPresenter: WalletPresenterInterface, PresenterPageable {
 
     unowned let view: WalletViewInterface
     let router: WalletRouterInterface
     let interactor: WalletInteractorInterface
 
     let activityIndicator = ActivityIndicator()
+    let headerRefreshTrigger = PublishRelay<Void>()
+    let footerLoadMoreTrigger = PublishRelay<Void>()
+    let isEnableLoadMore = BehaviorRelay<Bool>(value: true)
+    let isEmptyData = BehaviorRelay<Bool>(value: true)
+    let headerActivityIndicator = ActivityIndicator()
+    let footerActivityIndicator = ActivityIndicator()
+
     let trigger = PublishRelay<Void>()
+    var currentPage: Int = 1
+    let elements = BehaviorRelay<[Transaction]>(value: [])
 
     init(view: WalletViewInterface,
          router: WalletRouterInterface,
@@ -26,6 +35,16 @@ final class WalletPresenter: WalletPresenterInterface, HasActivityIndicator, Has
         self.view = view
         self.router = router
         self.interactor = interactor
+        
+        trigger
+            .flatMapLatest({ [weak self] () -> Driver<[Transaction]> in
+                guard let self = self else { return .just([]) }
+                return Single.just([Transaction](repeating: Transaction(), count: 10))
+                    .trackActivity(self.headerActivityIndicator)
+                    .asDriver(onErrorJustReturn: [])
+            })
+            ~> elements
+            ~ disposeBag
     }
 
     deinit {
