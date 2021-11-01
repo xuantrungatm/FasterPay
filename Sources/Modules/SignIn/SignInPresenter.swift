@@ -33,20 +33,29 @@ final class SignInPresenter: SignInPresenterInterface, HasActivityIndicator, Has
         self.router = router
         self.interactor = interactor
         
-        trigger
+        let loginReuslt = trigger
             .flatMapLatest({ [weak self] user -> Driver<Bool> in
                 guard let self = self, self.isValid(user: user) else { return .empty() }
                 return self.interactor.login(email: user.email, pass: user.pass)
                     .asDriver(onErrorJustReturn: false)
             })
             .asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [weak self] result in
+            
+        loginReuslt
+            .filter({ $0 })
+            .withLatestFrom(trigger.asDriverOnErrorJustComplete())
+            .drive(onNext: { [weak self] user in
                 guard let self = self else { return }
-                if result {
-                    self.router.moveToHome()
-                } else {
-                    self.view.showAlert(content: "Login fail!")
-                }
+                self.interactor.saveUser(email: user.email)
+                self.router.moveToHome()
+            })
+            ~ disposeBag
+        
+        loginReuslt
+            .filter({ !$0 })
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.view.showAlert(content: "Login fail!")
             })
             ~ disposeBag
     }
