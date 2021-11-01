@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,16 +14,70 @@
         <scene sceneID="GzV-lN-fg7">
             <objects>
                 <viewController id="vKn-9P-Ny8" customClass="QRScannerViewController" customModule="FasterPay" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BNZ-bO-rhc" customClass="GradientView" customModule="FasterPay" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BNZ-bO-rhc" customClass="GradientView" customModule="FasterPay" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="HgA-Aw-ocO"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7LP-03-mfQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="530"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP1-oT-6nP">
+                                <rect key="frame" x="0.0" y="530" width="375" height="66"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place QR code in the frame to scan it" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCP-IV-zUf">
+                                        <rect key="frame" x="66" y="20.5" width="243.5" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="P1s-qO-SKS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <color key="textColor" name="text"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="HCP-IV-zUf" firstAttribute="centerX" secondItem="pP1-oT-6nP" secondAttribute="centerX" id="Gv4-ij-Zzx"/>
+                                    <constraint firstItem="HCP-IV-zUf" firstAttribute="centerY" secondItem="pP1-oT-6nP" secondAttribute="centerY" id="gmT-17-cUV"/>
+                                    <constraint firstAttribute="height" constant="66" id="nK9-Fj-7fe"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhJ-9r-roP">
+                                <rect key="frame" x="0.0" y="596" width="375" height="71"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ySZ-HL-fRa"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="PhJ-9r-roP" secondAttribute="trailing" id="41y-xC-R2Y"/>
+                            <constraint firstItem="pP1-oT-6nP" firstAttribute="top" secondItem="7LP-03-mfQ" secondAttribute="bottom" id="6xs-fv-5WH"/>
+                            <constraint firstItem="PhJ-9r-roP" firstAttribute="top" secondItem="pP1-oT-6nP" secondAttribute="bottom" id="95L-SG-tFf"/>
+                            <constraint firstItem="PhJ-9r-roP" firstAttribute="leading" secondItem="BNZ-bO-rhc" secondAttribute="leading" id="DbQ-Bt-W3a"/>
+                            <constraint firstItem="7LP-03-mfQ" firstAttribute="top" secondItem="BNZ-bO-rhc" secondAttribute="top" id="Ldn-7J-SBR"/>
+                            <constraint firstItem="PhJ-9r-roP" firstAttribute="height" secondItem="ySZ-HL-fRa" secondAttribute="height" multiplier="0.106447" id="PoC-g2-iQS"/>
+                            <constraint firstItem="pP1-oT-6nP" firstAttribute="trailing" secondItem="ySZ-HL-fRa" secondAttribute="trailing" id="fkM-HG-yQs"/>
+                            <constraint firstAttribute="trailing" secondItem="7LP-03-mfQ" secondAttribute="trailing" id="o3b-fj-nni"/>
+                            <constraint firstAttribute="bottom" secondItem="PhJ-9r-roP" secondAttribute="bottom" id="pGF-ae-Cif"/>
+                            <constraint firstItem="pP1-oT-6nP" firstAttribute="leading" secondItem="ySZ-HL-fRa" secondAttribute="leading" id="sUu-Qh-jrx"/>
+                            <constraint firstItem="7LP-03-mfQ" firstAttribute="leading" secondItem="BNZ-bO-rhc" secondAttribute="leading" id="vQi-RB-Ezx"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scannerView" destination="7LP-03-mfQ" id="Enr-D9-8Pr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0X-am-vwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="244" y="205"/>
+            <point key="canvasLocation" x="244" y="204.64767616191907"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="text">
+            <color red="0.23921568627450981" green="0.28627450980392155" blue="0.33725490196078434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
