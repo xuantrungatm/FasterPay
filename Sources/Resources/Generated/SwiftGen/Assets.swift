@@ -23,10 +23,18 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Asset {
   internal enum Assets {
     internal static let background = ImageAsset(name: "background")
+    internal static let icAvatar = ImageAsset(name: "ic_avatar")
+    internal static let icAvatarBg = ImageAsset(name: "ic_avatar_bg")
+    internal static let icDetail = ImageAsset(name: "ic_detail")
     internal static let icFasterpayLogo = ImageAsset(name: "ic_fasterpay_logo")
+    internal static let icHelp = ImageAsset(name: "ic_help")
+    internal static let icInfo = ImageAsset(name: "ic_info")
+    internal static let icLogout = ImageAsset(name: "ic_logout")
     internal static let icPassportLogo = ImageAsset(name: "ic_passport_logo")
     internal static let icProfile = ImageAsset(name: "ic_profile")
     internal static let icScan = ImageAsset(name: "ic_scan")
+    internal static let icSecurity = ImageAsset(name: "ic_security")
+    internal static let icTerm = ImageAsset(name: "ic_term")
     internal static let icTouch = ImageAsset(name: "ic_touch")
     internal static let icWallet = ImageAsset(name: "ic_wallet")
     internal static let logo = ImageAsset(name: "logo")
@@ -37,6 +45,7 @@ internal enum Asset {
     internal static let main2 = ColorAsset(name: "main-2")
     internal static let main = ColorAsset(name: "main")
     internal static let mainBG = ColorAsset(name: "mainBG")
+    internal static let text = ColorAsset(name: "text")
     internal static let textfieldBG = ColorAsset(name: "textfieldBG")
   }
 }

@@ -9,6 +9,8 @@ import UIKit
 
 final class ProfileViewController: BaseViewController {
     
+    @IBOutlet weak var containView: UIView!
+    
     var presenter: ProfilePresenter!
 
     deinit {
@@ -22,6 +24,15 @@ final class ProfileViewController: BaseViewController {
 
     override func setupUI() {
         super.setupUI()
+        let path = UIBezierPath(
+            roundedRect: containView.bounds,
+            byRoundingCorners: [.topLeft, .topRight],
+            cornerRadii: CGSize(width: 20, height:  20)
+        )
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        containView.layer.mask = maskLayer
+        containView.layer.masksToBounds = true
     }    
 
     override func bindDatas() {
@@ -30,6 +41,9 @@ final class ProfileViewController: BaseViewController {
         presenter.bind(isLoading: isLoading)
     }
     
+    @IBAction func logout(_ sender: UIButton) {
+        
+    }
 }
 
 extension ProfileViewController: ProfileViewInterface {}
