@@ -36,6 +36,16 @@ extension UIView {
         }
     }
     
+    func setRadius(corner: UIRectCorner, cornerRadii: CGSize) {
+        let path = UIBezierPath(roundedRect: bounds,
+                                byRoundingCorners: corner,
+                                cornerRadii: cornerRadii)
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        layer.mask = maskLayer
+        layer.masksToBounds = true
+    }
+    
     func setGradientBackground(topColor: UIColor, bottomColor: UIColor, maskColor: UIColor? = nil) {
         
         let shapeMask = CAShapeLayer()

@@ -337,6 +337,9 @@
                             <constraint firstItem="euc-zN-GS2" firstAttribute="trailing" secondItem="gKy-Qi-Hqr" secondAttribute="trailing" id="wRN-9p-i9Y"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="containerView" destination="z9F-NN-Nqy" id="s01-C9-gCU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0X-am-vwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,6 +9,8 @@ import UIKit
 
 final class PaymentViewController: BaseViewController {
     
+    @IBOutlet weak var containerView: UIView!
+    
     var presenter: PaymentPresenter!
     var info: PaymentInfo?
 
@@ -23,7 +25,7 @@ final class PaymentViewController: BaseViewController {
 
     override func setupUI() {
         super.setupUI()
-        
+        containerView.setRadius(corner: [.topLeft, .topRight], cornerRadii: CGSize(width: 20, height:  20))
     }
 
     @IBAction func clickBack(_ sender: UIButton) {

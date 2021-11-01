@@ -24,15 +24,7 @@ final class ProfileViewController: BaseViewController {
 
     override func setupUI() {
         super.setupUI()
-        let path = UIBezierPath(
-            roundedRect: containView.bounds,
-            byRoundingCorners: [.topLeft, .topRight],
-            cornerRadii: CGSize(width: 20, height:  20)
-        )
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        containView.layer.mask = maskLayer
-        containView.layer.masksToBounds = true
+        containView.setRadius(corner: [.topLeft, .topRight], cornerRadii: CGSize(width: 20, height:  20))
     }    
 
     override func bindDatas() {
