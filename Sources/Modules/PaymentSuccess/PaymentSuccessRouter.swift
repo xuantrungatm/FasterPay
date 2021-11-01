@@ -29,6 +29,12 @@ final class PaymentSuccessRouter: PaymentSuccessRouterInterface, Router {
             let rootVC = UIApplication.shared.keyWindow?.rootViewController
             let tabbarVC = rootVC as? MainViewController
             AppHelper.shared.topViewController()?.navigationController?.popToRootViewController(animated: false)
+            
+            if let navi = tabbarVC?.viewControllers?.first as? BaseNavigationController,
+               let walletVC = navi.viewControllers.first as? WalletViewController {
+                walletVC.presenter.trigger.accept(())
+                walletVC.presenter.userTrigger.accept(())
+            }
             tabbarVC?.selectedIndex = 0
         }
     }

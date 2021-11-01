@@ -11,6 +11,8 @@ extension Double {
     func toCurrencyFormat() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
         let string = formatter.string(from: self as NSNumber)!
         if self >= 0 {
             return String(string.dropFirst())

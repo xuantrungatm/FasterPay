@@ -10,5 +10,11 @@ import Foundation
 struct PaymentInfo: Codable {
     var name: String?
     var amount: Double?
-    var currency: String?
+    var currencyCode: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case amount
+        case currencyCode = "currency_code"
+    }
 }

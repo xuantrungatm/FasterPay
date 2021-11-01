@@ -6,4 +6,6 @@
 //
 
 protocol PaymentViewInterface: BaseView {
+    func updateUI(with user: User?)
+    func showAlert(content: String, action: ((UIAlertAction) -> Void)?)
 }

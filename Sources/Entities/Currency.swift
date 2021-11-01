@@ -13,48 +13,53 @@ enum Currency: Int, PersistableEnum, Codable {
     case vnd
     case yen
     case baht
+    case usd
+    case euro
     
-    private var factor: Double {
-        switch self {
-        case .vnd:
-            return 207.55
-        case .yen:
-            return 1
-        case .baht:
-            return 0.3
+    init?(code: String) {
+        switch code.uppercased() {
+        case "JPY":
+            self = .yen
+        case "THB":
+            self = .baht
+        case "VND":
+            self = .vnd
+        case "USD":
+            self = .usd
+        case "EUR":
+            self = .euro
+        default:
+            return nil
         }
     }
     
-    var toVNDFactor: Double {
+    var valuePerUSD: Double {
         switch self {
         case .vnd:
-            return 1
+            return 22755
         case .yen:
-            return  Currency.vnd.factor / Currency.yen.factor
+            return 114.01
         case .baht:
-            return Currency.vnd.factor / Currency.baht.factor
+            return 33.29
+        case .usd:
+            return 1
+        case .euro:
+            return 0.86
         }
     }
     
-    var vndToCurrencyFactor: Double {
-        switch self {
-        case .vnd:
-            return 1
-        case .yen:
-            return  Currency.yen.factor / Currency.vnd.factor
-        case .baht:
-            return Currency.baht.factor / Currency.vnd.factor
-        }
-    }
-    
-    var description: String {
+    var code: String {
         switch self {
         case .yen:
-            return "Japanese Yen"
+            return "JPY"
         case .baht:
-            return "Thai Baht"
+            return "THB"
         case .vnd:
-            return "Vietnamese Dong"
+            return "VND"
+        case .usd:
+            return "USD"
+        case .euro:
+            return "EUR"
         }
     }
     
@@ -66,6 +71,10 @@ enum Currency: Int, PersistableEnum, Codable {
             return "฿"
         case .vnd:
             return "₫"
+        case .usd:
+            return "$"
+        case .euro:
+            return "€"
         }
     }
 }

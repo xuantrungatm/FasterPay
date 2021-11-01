@@ -13,6 +13,7 @@ protocol RealmDataBaseInterface {
     func getUserInfo(email: String) -> Single<RMUser?>
     func login(email: String, pass: String) -> Single<Bool>
     func allTransactions(email: String) -> Single<[RMTransaction]>
+    func createTransaction(email: String, transaction: RMTransaction) -> Single<Bool>
 }
 
 final class RealmDataBase: RealmDataBaseInterface {
@@ -67,4 +68,18 @@ final class RealmDataBase: RealmDataBaseInterface {
         }
     }
     
+    func createTransaction(email: String, transaction: RMTransaction) -> Single<Bool> {
+        Single<Bool>.create { [weak self] single in
+            if let user = self?.realm?.object(ofType: RMUser.self, forPrimaryKey: email) {
+                try? self?.realm?.write {
+                    user.transactions.append(transaction)
+                    user.balance -= transaction.amount
+                    single(.success(true))
+                }
+            } else {
+                single(.success(false))
+            }
+            return Disposables.create()
+        }
+    }
 }

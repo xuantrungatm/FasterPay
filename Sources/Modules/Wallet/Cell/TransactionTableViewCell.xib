@@ -54,7 +54,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="amount" destination="Khu-CS-S7I" id="MMO-ms-QQM"/>
-                <outlet property="name" destination="Khu-CS-S7I" id="KEa-dI-eaK"/>
+                <outlet property="name" destination="YNc-Oa-UWg" id="du6-Kg-QCp"/>
             </connections>
             <point key="canvasLocation" x="37.681159420289859" y="82.366071428571431"/>
         </tableViewCell>

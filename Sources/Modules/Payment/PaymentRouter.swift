@@ -9,6 +9,7 @@ import UIKit
 
 protocol PaymentRouterInterface {
     func presentPaymentSuccess()
+    func backToScanQR()
 }
 
 final class PaymentRouter: PaymentRouterInterface, Router {
@@ -22,6 +23,10 @@ final class PaymentRouter: PaymentRouterInterface, Router {
             router: self,
             interactor: PaymentInteractor()
         )
+    }
+    
+    func backToScanQR() {
+        viewController.navigationController?.popViewController(animated: true)
     }
     
     func presentPaymentSuccess() {

@@ -18,7 +18,8 @@ class TransactionTableViewCell: UITableViewCell, NibReusable {
     }
 
     func config(transaction: Transaction) {
-        
+        name.text = transaction.content
+        amount.text = "- \(transaction.currency.symbol) \(transaction.amount.toCurrencyFormat())"
     }
     
 }

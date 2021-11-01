@@ -341,7 +341,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="balanceLabel" destination="y3k-Hh-KDg" id="TbJ-Lv-h4T"/>
                         <outlet property="containerView" destination="z9F-NN-Nqy" id="s01-C9-gCU"/>
+                        <outlet property="feeLabel" destination="LC4-eS-P4Q" id="NAr-Rg-86a"/>
+                        <outlet property="nameLabel" destination="kdV-En-YVs" id="RQc-tp-Vui"/>
+                        <outlet property="paymentButton" destination="CwP-6G-zXT" id="wsa-0V-NPr"/>
+                        <outlet property="subtotalLabel" destination="Rqq-1g-4Rl" id="qmk-nK-Jo4"/>
+                        <outlet property="totalAmountLabel" destination="hyg-f8-sKJ" id="7ef-SZ-FgQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0X-am-vwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
