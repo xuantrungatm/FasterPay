@@ -15,37 +15,37 @@ internal enum StoryboardScene {
   internal enum PaymentSuccessViewController: StoryboardType {
     internal static let storyboardName = "PaymentSuccessViewController"
 
-    internal static let initialScene = InitialSceneType<FasterPay.PaymentSuccessViewController>(storyboard: PaymentSuccessViewController.self)
+    internal static let initialScene = InitialSceneType<PaymentSuccessViewController>(storyboard: PaymentSuccessViewController.self)
   }
   internal enum PaymentViewController: StoryboardType {
     internal static let storyboardName = "PaymentViewController"
 
-    internal static let initialScene = InitialSceneType<FasterPay.PaymentViewController>(storyboard: PaymentViewController.self)
+    internal static let initialScene = InitialSceneType<PaymentViewController>(storyboard: PaymentViewController.self)
   }
   internal enum ProfileViewController: StoryboardType {
     internal static let storyboardName = "ProfileViewController"
 
-    internal static let initialScene = InitialSceneType<FasterPay.ProfileViewController>(storyboard: ProfileViewController.self)
+    internal static let initialScene = InitialSceneType<ProfileViewController>(storyboard: ProfileViewController.self)
   }
   internal enum QRScannerViewController: StoryboardType {
     internal static let storyboardName = "QRScannerViewController"
 
-    internal static let initialScene = InitialSceneType<FasterPay.QRScannerViewController>(storyboard: QRScannerViewController.self)
+    internal static let initialScene = InitialSceneType<QRScannerViewController>(storyboard: QRScannerViewController.self)
   }
   internal enum SignInViewController: StoryboardType {
     internal static let storyboardName = "SignInViewController"
 
-    internal static let initialScene = InitialSceneType<FasterPay.SignInViewController>(storyboard: SignInViewController.self)
+    internal static let initialScene = InitialSceneType<SignInViewController>(storyboard: SignInViewController.self)
   }
   internal enum SignUpViewController: StoryboardType {
     internal static let storyboardName = "SignUpViewController"
 
-    internal static let initialScene = InitialSceneType<FasterPay.SignUpViewController>(storyboard: SignUpViewController.self)
+    internal static let initialScene = InitialSceneType<SignUpViewController>(storyboard: SignUpViewController.self)
   }
   internal enum WalletViewController: StoryboardType {
     internal static let storyboardName = "WalletViewController"
 
-    internal static let initialScene = InitialSceneType<FasterPay.WalletViewController>(storyboard: WalletViewController.self)
+    internal static let initialScene = InitialSceneType<WalletViewController>(storyboard: WalletViewController.self)
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

@@ -28,7 +28,9 @@ installPods:
 
 # update bundle and install pod
 .PHONY: update
-update: updateBundle updatePods
+update: updateBrew updateBundle updatePods
+updateBrew:
+	brew update
 updateBundle: 
 	bundle update
 updatePods: 
